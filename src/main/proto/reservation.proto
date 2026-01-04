@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.hotel.grpc.generated";
+option java_outer_classname = "HotelReservationProtos";
+
+package hotel;
+
+
+// Client message
+message ClientProto {
+    int64 id = 1;
+    string nom = 2;
+    string prenom = 3;
+    string email = 4;
+    string telephone = 5;
+}
+
+// Chambre (Room) message
+message ChambreProto {
+    int64 id = 1;
+    ChambreType type = 2;
+    double prix = 3;
+    bool disponible = 4;
+}
+
+// Room type enum
+enum ChambreType {
+    SIMPLE = 0;
+    DOUBLE = 1;
+}
+
+// Reservation message
+message ReservationProto {
+    int64 id = 1;
+    ClientProto client = 2;
+    ChambreProto chambre = 3;
+    string date_debut = 4;
+    string date_fin = 5;
+    string preferences = 6;
+}
+
+// Request messages
+message CreateReservationRequest {
+    int64 client_id = 1;
+    int64 chambre_id = 2;
+    string date_debut = 3;
+    string date_fin = 4;
+    string preferences = 5;
+}
+
+message GetReservationRequest {
+    int64 id = 1;
+}
+
+message UpdateReservationRequest {
+    int64 id = 1;
+    int64 client_id = 2;
+    int64 chambre_id = 3;
+    string date_debut = 4;
+    string date_fin = 5;
+    string preferences = 6;
+}
+
+message DeleteReservationRequest {
+    int64 id = 1;
+}
+
+// Response messages
+message ReservationResponse {
+    ReservationProto reservation = 1;
+}
+
+message DeleteReservationResponse {
+    bool success = 1;
+}
+
+// Reservation gRPC Service
+service ReservationGrpcService {
+    // Create a new reservation
+    rpc CreateReservation(CreateReservationRequest) returns (ReservationResponse);
+    
+    // Get reservation by ID
+    rpc GetReservation(GetReservationRequest) returns (ReservationResponse);
+    
+    // Update an existing reservation
+    rpc UpdateReservation(UpdateReservationRequest) returns (ReservationResponse);
+    
+    // Delete a reservation
+    rpc DeleteReservation(DeleteReservationRequest) returns (DeleteReservationResponse);
+}

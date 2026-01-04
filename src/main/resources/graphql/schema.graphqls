@@ -1,0 +1,67 @@
+# Hotel Reservation System - GraphQL Schema
+
+# Enum for room types
+enum TypeChambre {
+    SIMPLE
+    DOUBLE
+}
+
+# Client type
+type Client {
+    id: ID!
+    nom: String!
+    prenom: String!
+    email: String!
+    telephone: String!
+}
+
+# Chambre (Room) type
+type Chambre {
+    id: ID!
+    type: TypeChambre!
+    prix: Float!
+    disponible: Boolean!
+}
+
+# Reservation type
+type Reservation {
+    id: ID!
+    client: Client!
+    chambre: Chambre!
+    dateDebut: String!
+    dateFin: String!
+    preferences: String
+}
+
+# Input for creating/updating reservations
+input ReservationInput {
+    clientId: ID!
+    chambreId: ID!
+    dateDebut: String!
+    dateFin: String!
+    preferences: String
+}
+
+# Query operations
+type Query {
+    # Get a reservation by ID
+    reservationById(id: ID!): Reservation
+
+    # Get all reservations
+    allReservations: [Reservation!]!
+
+    # Get reservations by client ID
+    reservationsByClient(clientId: ID!): [Reservation!]!
+}
+
+# Mutation operations
+type Mutation {
+    # Create a new reservation
+    createReservation(input: ReservationInput!): Reservation!
+
+    # Update an existing reservation
+    updateReservation(id: ID!, input: ReservationInput!): Reservation!
+
+    # Delete a reservation
+    deleteReservation(id: ID!): Boolean!
+}

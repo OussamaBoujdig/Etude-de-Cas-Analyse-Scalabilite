@@ -1,0 +1,41 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/resources/com/google/api/*.proto
+!**/src/main/resources/google/api/*.proto
+!**/src/main/resources/google/logging/type/*.proto
+!**/src/main/resources/google/longrunning/*.proto
+!**/src/main/resources/google/rpc/*.proto
+!**/src/main/resources/google/type/*.proto
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/resources/architecture.html
+
+### VS Code ###
+.vscode/
+
+### Others ###
+*.log
+*.sql
+*.temp
+.DS_Store
